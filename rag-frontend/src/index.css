@@ -1,0 +1,538 @@
+/* src/index.css
+   Full file (copy-paste as-is):
+   - Tailwind directives
+   - Apple/CRED dark base + scrollbars
+   - White–silver titanium buttons (New/Send/Refresh)
+   - User bubble grey glass
+   - Aurora edges (ABSOLUTE so it scrolls with content height)
+   - Wide marching stroke around edges
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Base theme (Apple/CRED dark)
+   ========================= */
+:root {
+  color-scheme: dark;
+
+  /* Aurora palette */
+  --a-pink: rgba(255, 70, 205, 0.95);
+  --a-purple: rgba(145, 80, 255, 0.95);
+  --a-blue: rgba(45, 210, 255, 0.92);
+  --a-warm: rgba(255, 120, 80, 0.55);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(900px 500px at 80% 30%, rgba(255, 255, 255, 0.06), transparent 55%),
+    #0a0a0b;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* nicer scrollbars (optional) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+/* =========================
+   App wrapper for ABSOLUTE aurora
+   (Put this class on your outermost div)
+   ========================= */
+.aurora-stage {
+  position: relative; /* <-- makes the absolute aurora overlay follow content height */
+  min-height: 100vh;
+}
+
+/* =========================
+   Ultra light white–silver titanium (very bright)
+   ========================= */
+.btn-titanium {
+  position: relative;
+  border-radius: 999px;
+
+  /* soft, bright silver rim */
+  border: 1px solid rgba(255, 255, 255, 0.60);
+
+  /* very bright body (cool silver tint so it stays “metal”) */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(245, 249, 255, 0.70) 42%,
+    rgba(220, 232, 248, 0.48) 100%
+  );
+
+  /* dark text for contrast */
+  color: rgba(0, 0, 0, 0.78);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  /* crisp top highlight + gentle depth */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 14px 34px rgba(0, 0, 0, 0.30);
+
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn-titanium-xs { padding: 6px 12px; font-size: 12px; }
+.btn-titanium-sm { padding: 8px 14px; font-size: 13px; }
+.btn-titanium-md { padding: 12px 18px; font-size: 14px; }
+
+.btn-titanium:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(245, 249, 255, 0.78) 42%,
+    rgba(220, 232, 248, 0.52) 100%
+  );
+}
+
+.btn-titanium:active:not(:disabled) {
+  transform: translateY(0.5px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(245, 249, 255, 0.66) 42%,
+    rgba(220, 232, 248, 0.46) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    0 10px 26px rgba(0, 0, 0, 0.26);
+}
+
+/* Disabled should stay white-silver, just slightly darker */
+.btn-titanium:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+  filter: brightness(0.88) contrast(0.98) saturate(0.98);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+/* stop shimmer when disabled */
+.btn-titanium:disabled::after {
+  animation: none;
+  opacity: 0;
+}
+
+/* periodic shimmer */
+.btn-titanium::after {
+  content: "";
+  position: absolute;
+  top: -70%;
+  left: -70%;
+  width: 55%;
+  height: 260%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.95) 48%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(18deg) translateX(-160%);
+  opacity: 0;
+  animation: titaniumShimmer 3.6s ease-in-out infinite;
+}
+
+@keyframes titaniumShimmer {
+  0%   { transform: rotate(18deg) translateX(-160%); opacity: 0; }
+  10%  { opacity: 1; }
+  20%  { transform: rotate(18deg) translateX(260%); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+
+
+/* =========================
+   Titanium text (same look as btn-titanium, but for headings)
+   ========================= */
+.titanium-text {
+  /* gradient “paint” for the letters */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(245, 249, 255, 0.78) 45%,
+    rgba(220, 232, 248, 0.55) 100%
+  );
+
+  /* clip gradient into the glyphs */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* make the actual text color transparent so gradient shows */
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  /* subtle depth like metal */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.10),
+    0 10px 30px rgba(0,0,0,0.45);
+
+  /* a tiny “rim light” feel */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.08));
+}
+
+/* Optional: slightly dim on very small text (use if needed) */
+.titanium-text-soft {
+  opacity: 0.95;
+
+}
+
+
+
+/* =========================
+   Chat bubbles
+   ========================= */
+
+/* user bubble: grey glass (instead of white) */
+.user-bubble {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+}
+
+/* optional: white–silver bubble if you ever need it */
+.titanium-bubble {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.60);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(245, 249, 255, 0.70) 42%,
+    rgba(220, 232, 248, 0.48) 100%
+  );
+  color: rgba(0, 0, 0, 0.78);
+  font-weight: 650;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+/* =========================
+   Aurora Edges (ABSOLUTE + content-height)
+   ========================= */
+
+/* Overlay container: ABSOLUTE so it grows with .aurora-stage height */
+.aurora-edges {
+  position: absolute;  /* <-- key change from fixed */
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;          /* keep behind the app content; use z-10 on actual UI */
+  isolation: isolate;  /* stabilizes blend/mask compositing (prevents seams) */
+}
+
+/* Corner caps to prevent seams/patches where edges overlap */
+.aurora-corner {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  pointer-events: none;
+  z-index: 0;
+}
+.aurora-corner.tl { top: -30px; left: -30px; }
+.aurora-corner.tr { top: -30px; right: -30px; }
+.aurora-corner.bl { bottom: -30px; left: -30px; }
+.aurora-corner.br { bottom: -30px; right: -30px; }
+
+.aurora-corner::before {
+  content: "";
+  position: absolute;
+  inset: -140px;
+  background:
+    radial-gradient(closest-side, var(--a-purple), rgba(145,80,255,0) 70%),
+    radial-gradient(closest-side, var(--a-pink), rgba(255,70,205,0) 74%),
+    radial-gradient(closest-side, var(--a-blue), rgba(45,210,255,0) 74%);
+  filter: blur(80px);
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+
+/* Each edge container */
+.aurora-edge {
+  position: absolute;
+  overflow: hidden;  /* clips ambient glow cleanly */
+  opacity: 1;
+}
+
+/* Ambient glow band thickness */
+.aurora-edge.top,
+.aurora-edge.bottom {
+  left: 0;
+  right: 0;
+  height: 120px;
+}
+
+.aurora-edge.left,
+.aurora-edge.right {
+  top: 0;
+  bottom: 0;
+  width: 120px;
+}
+
+/* Position */
+.aurora-edge.top { top: 0; }
+.aurora-edge.bottom { bottom: 0; }
+.aurora-edge.left { left: 0; }
+.aurora-edge.right { right: 0; }
+
+/* Mask/fade ambient glow so it doesn’t wash content */
+.aurora-edge.top {
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+.aurora-edge.bottom {
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+.aurora-edge.left {
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+.aurora-edge.right {
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+/* Ambient glow blob layer */
+.aurora-glow {
+  position: absolute;
+  inset: -220px; /* large canvas for smooth blur */
+  display: block;
+
+  background:
+    radial-gradient(closest-side, var(--a-purple), rgba(145,80,255,0) 70%),
+    radial-gradient(closest-side, var(--a-pink), rgba(255,70,205,0) 72%),
+    radial-gradient(closest-side, var(--a-blue), rgba(45,210,255,0) 72%),
+    radial-gradient(closest-side, var(--a-warm), rgba(255,120,80,0) 82%);
+
+  filter: blur(70px);
+  opacity: 0.28;
+  mix-blend-mode: screen;
+
+  animation: auroraGlowDrift 7.2s ease-in-out infinite,
+             auroraHue 10.8s ease-in-out infinite;
+}
+
+/* =========================
+   Marching stroke (wide + diffused inward)
+   (This is the clockwise “ants” band)
+   ========================= */
+.aurora-stroke {
+  position: absolute;
+  display: block;
+  opacity: 0.95;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform, filter, background-position;
+}
+
+/* TOP band */
+.aurora-edge.top .aurora-stroke {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 22px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      var(--a-purple) 18%,
+      var(--a-pink) 50%,
+      var(--a-blue) 82%,
+      rgba(255,255,255,0) 100%
+    ) 0 0 / 220% 4px no-repeat,
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(145,80,255,0.35) 18%,
+      rgba(255,70,205,0.32) 50%,
+      rgba(45,210,255,0.30) 82%,
+      rgba(255,255,255,0) 100%
+    ) 0 0 / 220% 22px no-repeat;
+
+  filter:
+    drop-shadow(0 0 10px rgba(255,70,205,0.26))
+    drop-shadow(0 0 14px rgba(145,80,255,0.20))
+    drop-shadow(0 0 18px rgba(45,210,255,0.16));
+
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+
+  animation: auroraSweepX 6.8s linear infinite, auroraPulse 2.8s ease-in-out infinite;
+}
+
+/* BOTTOM band */
+.aurora-edge.bottom .aurora-stroke {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      var(--a-blue) 18%,
+      var(--a-pink) 50%,
+      var(--a-purple) 82%,
+      rgba(255,255,255,0) 100%
+    ) 0 100% / 220% 4px no-repeat,
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(45,210,255,0.30) 18%,
+      rgba(255,70,205,0.32) 50%,
+      rgba(145,80,255,0.35) 82%,
+      rgba(255,255,255,0) 100%
+    ) 0 100% / 220% 22px no-repeat;
+
+  filter:
+    drop-shadow(0 0 10px rgba(255,70,205,0.24))
+    drop-shadow(0 0 14px rgba(145,80,255,0.18))
+    drop-shadow(0 0 18px rgba(45,210,255,0.14));
+
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+
+  animation: auroraSweepX 6.8s linear infinite reverse, auroraPulse 2.8s ease-in-out infinite;
+}
+
+/* LEFT band */
+.aurora-edge.left .aurora-stroke {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0) 0%,
+      var(--a-purple) 20%,
+      var(--a-pink) 50%,
+      var(--a-blue) 80%,
+      rgba(255,255,255,0) 100%
+    ) 0 0 / 4px 220% no-repeat,
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0) 0%,
+      rgba(145,80,255,0.35) 20%,
+      rgba(255,70,205,0.32) 50%,
+      rgba(45,210,255,0.30) 80%,
+      rgba(255,255,255,0) 100%
+    ) 0 0 / 22px 220% no-repeat;
+
+  filter:
+    drop-shadow(0 0 10px rgba(255,70,205,0.24))
+    drop-shadow(0 0 14px rgba(145,80,255,0.18))
+    drop-shadow(0 0 18px rgba(45,210,255,0.14));
+
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+
+  animation: auroraSweepY 7.6s linear infinite, auroraPulse 2.8s ease-in-out infinite;
+}
+
+/* RIGHT band */
+.aurora-edge.right .aurora-stroke {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0) 0%,
+      var(--a-blue) 20%,
+      var(--a-pink) 50%,
+      var(--a-purple) 80%,
+      rgba(255,255,255,0) 100%
+    ) 100% 0 / 4px 220% no-repeat,
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0) 0%,
+      rgba(45,210,255,0.30) 20%,
+      rgba(255,70,205,0.32) 50%,
+      rgba(145,80,255,0.35) 80%,
+      rgba(255,255,255,0) 100%
+    ) 100% 0 / 22px 220% no-repeat;
+
+  filter:
+    drop-shadow(0 0 10px rgba(255,70,205,0.24))
+    drop-shadow(0 0 14px rgba(145,80,255,0.18))
+    drop-shadow(0 0 18px rgba(45,210,255,0.14));
+
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+
+  animation: auroraSweepY 7.6s linear infinite reverse, auroraPulse 2.8s ease-in-out infinite;
+}
+
+/* -------------------------
+   Animations
+   ------------------------- */
+@keyframes auroraGlowDrift {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  50%  { transform: translate(18px, -12px) scale(1.03); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes auroraHue {
+  0%   { filter: blur(70px) hue-rotate(0deg); }
+  50%  { filter: blur(70px) hue-rotate(14deg); }
+  100% { filter: blur(70px) hue-rotate(0deg); }
+}
+
+@keyframes auroraSweepX {
+  0%   { background-position: 0% 0%, 0% 0%; }
+  100% { background-position: 220% 0%, 220% 0%; }
+}
+
+@keyframes auroraSweepY {
+  0%   { background-position: 0% 0%, 0% 0%; }
+  100% { background-position: 0% 220%, 0% 220%; }
+}
+
+@keyframes auroraPulse {
+  0%, 100% { opacity: 0.72; }
+  50%      { opacity: 1; }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-glow,
+  .aurora-stroke,
+  .btn-titanium::after {
+    animation: none !important;
+  }
+}
