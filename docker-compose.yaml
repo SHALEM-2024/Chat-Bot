@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: BACKEND/Dockerfile
+    image: shalem007/backend-chatbot-phase1:latest
     container_name: rag-backend
     environment:
       - DB_PATH=/data/chatbot.db
@@ -15,6 +16,7 @@ services:
     build:
       context: .
       dockerfile: rag-frontend/Dockerfile
+    image: shalem007/frontend-chat-bot-phase-1:latest
     container_name: rag-frontend
     ports:
       - "80:80"
