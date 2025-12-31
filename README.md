@@ -18,7 +18,7 @@ All you need is:
 
 When you start the stack:
 
-- Frontend runs on: **http://localhost/** or on **http://<public-ip>/** (port 80)
+- Frontend runs on: **http://localhost/** or on **http://public-ip/** (port 80 on the public ip of EC2 instance)
 - Backend runs inside Docker and is reachable by the frontend using the Docker network
 
 The backend also stores its SQLite database in a Docker **named volume** so your data is not lost when containers restart.
