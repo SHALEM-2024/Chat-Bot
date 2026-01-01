@@ -2,7 +2,7 @@
 
 1) It has memory of previous interactions.
 2) It stores the interactions as conversations in a database.
-3) It has 3 tools: Stock Price fetching tool(used Alpha Vantage API), Search tool using DuckDuckGoSearchRun, Basic Calculator.
+3) It has 4 tools: Rag tool, Stock Price fetching tool(used Alpha Vantage API), Search tool using DuckDuckGoSearchRun, Basic Calculator.
 4) Stylistic UI
 
 ##
