@@ -48,6 +48,7 @@ Check versions:
 ```bash
 docker --version
 docker compose version
+```
 
 ## Usage
 
