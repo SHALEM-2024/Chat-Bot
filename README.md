@@ -5,6 +5,7 @@
 3) It has 3 tools: Stock Price fetching tool(used Alpha Vantage API), Search tool using DuckDuckGoSearchRun, Basic Calculator.
 4) Stylistic UI
 
+
    **Image for demonstration and Technical details are below** 
 
 <img width="1908" height="1063" alt="image" src="https://github.com/user-attachments/assets/78c338ab-ae52-4ac6-9672-4e9458b493f1" />
