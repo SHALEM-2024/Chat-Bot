@@ -1,21 +1,20 @@
 # RAG Chatbot — Roadmap (MVP → Better MVP → Scalable)
 
-This repository contains a Dockerized **RAG (Retrieval-Augmented Generation)** chatbot system.
+This repository contains a Dockerized chatbot system which can use multiple tools including **RAG (Retrieval-Augmented Generation)**
 
-**RAG** means: the app first *retrieves* relevant text from your documents (search), then sends that text to an LLM (a “Large Language Model”, like OpenAI models) to generate an answer grounded in those documents.
+The app if provided with a PDF first *retrieves* relevant text from your documents (search), then sends that text to an LLM (a “Large Language Model”, like OpenAI models) to generate an answer grounded in those documents.
 
 ---
 
 ## What’s in this project (current)
 
 - **Frontend:** React (served via **Nginx**)
-  - React is the web UI.
-  - Nginx is a lightweight web server used to serve the built frontend and (optionally) forward API requests to the backend.
-- **Backend:** FastAPI + LangGraph/LangChain (Python)
-  - FastAPI is the Python web API framework.
+  - React - the web UI.
+  - Nginx - a lightweight web server used to serve the built frontend and (optionally) forward API requests to the backend.
+- **Backend:** FastAPI + LangGraph/LangChain
+  - FastAPI -s the Python web API framework.
   - LangChain/LangGraph orchestrate retrieval + chat flow.
 - **Storage:** SQLite database persisted via a Docker volume
-  - SQLite is a file-based database (single file). Great for MVP and local runs.
 
 ---
 
@@ -43,7 +42,7 @@ This repository contains a Dockerized **RAG (Retrieval-Augmented Generation)** c
 
 ### Planned upgrades
 - Replace SQLite with **Postgres**
-  - Postgres is a server-based database built for concurrent usage (many users at once).
+  - Postgres for concurrent usage (many users at once).
 - Solidify database migration strategy (moving existing data safely)
 - Improve observability (basic logs, health checks)
 
@@ -60,10 +59,8 @@ This repository contains a Dockerized **RAG (Retrieval-Augmented Generation)** c
 
 ### Planned upgrades
 - Store PDFs in **object storage** (example: S3-compatible storage)
-  - Object storage is made for storing large files reliably.
-- Run multiple backend replicas behind a load balancer
-  - A load balancer is a component that spreads traffic across multiple backend copies.
-- Choose scalable retrieval storage:
+- Run multiple backend replicas behind a load balancer for spreading traffic across multiple backend copies.
+- Choosing scalable retrieval storage:
   - Either **pgvector** (vectors inside Postgres) or a dedicated vector DB if needed
 
 ### What this enables
