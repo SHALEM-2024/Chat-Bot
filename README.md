@@ -48,3 +48,17 @@ Check versions:
 ```bash
 docker --version
 docker compose version
+
+## Usage
+
+Pull images from dockerhub:
+
+ - docker compose pull
+
+Start containers:
+
+ - docker compose up -d
+ check status
+ - docker compose ps
+ - docker ps
+
