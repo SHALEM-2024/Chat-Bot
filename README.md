@@ -52,14 +52,14 @@ docker compose version
 
 ## Usage
 
-Pull images from dockerhub:
+ - Pull images from dockerhub:
 
- - docker compose pull
+   ```docker compose pull```
 
-Start containers:
+ - Start containers:
 
- - docker compose up -d
- check status
- - docker compose ps
- - docker ps
+  ```docker compose up -d```
+  - check status
+   ```docker compose ps```
+   ```docker ps```
 
