@@ -1,0 +1,23 @@
+1. When ever I am clicking on new,  a new chat is being created the Thread id is also displayed but the record is not being added in the data base/SQLite - DONE
+
+2. When ever I am trying to click on a thread, the past history of conversation is not loading when clicking on a specific thread. - DONE 
+
+3. Need to make the entire app run on docker on cloud to make it accessible for recruiters to see. - Phase 1 DONE
+
+4. Whenever there is some kind of formatting, it is not displayed properly in the frontend, Need to correct it.
+
+5. Instead of showing uuid in the conversations, I want to display a title or the names of the chat. for this to implement I want to make a dictionary of uuids and its titles. and display those titles.
+
+6. Need to display the list of tools available for llm to use.
+
+7. Need to make the embedded document to persist in a separate database.
+
+8. When ever I refresh the conversations are not automatically loading unless and until I press "new" button. need to change so that they load automatically.
+
+9. Need to make some arrangement for showing the user what tool the llm was using without making the user guess what the bot was doing, there by reducing user drop-offs.
+
+10. Need to make the app streamable so that, the letters are presented token by token instead of token by token
+
+11. Whenever I am trying to upload a PDF, and during the chunking and embedding there is no progress bar or any notification saying that chunking is done/ embedding is done etc -
+
+12. Need to think about how to implement different conversations for separate users.
