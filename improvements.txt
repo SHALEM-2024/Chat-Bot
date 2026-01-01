@@ -4,7 +4,7 @@
 
 3. Need to make the entire app run on docker on cloud to make it accessible for recruiters to see. - Phase 1 DONE
 
-4. Whenever there is some kind of formatting, it is not displayed properly in the frontend, Need to correct it.
+4. Whenever there is some kind of formatting in the LLM's response, it is not displayed properly in the frontend, Need to correct it.
 
 5. Instead of showing uuid in the conversations, I want to display a title or the names of the chat. for this to implement I want to make a dictionary of uuids and its titles. and display those titles.
 
@@ -12,7 +12,7 @@
 
 7. Need to make the embedded document to persist in a separate database.
 
-8. When ever I refresh the conversations are not automatically loading unless and until I press "new" button. need to change so that they load automatically.
+8. When ever I refresh the conversations are not automatically loading unless and until I press "new" button. need to change so that they load automatically. - DONE
 
 9. Need to make some arrangement for showing the user what tool the llm was using without making the user guess what the bot was doing, there by reducing user drop-offs.
 
