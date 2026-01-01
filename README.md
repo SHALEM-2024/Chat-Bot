@@ -59,8 +59,10 @@ docker compose version
  - Start containers:
 
   ```docker compose up -d```
+  
  - check status:
    
    ```docker compose ps```
+   
    ```docker ps```
 
