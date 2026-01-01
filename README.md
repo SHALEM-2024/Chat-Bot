@@ -1,6 +1,6 @@
 # RAG Chatbot (Frontend + Backend) — Docker Compose Setup
 
-<img width="1898" height="905" alt="image" src="https://github.com/user-attachments/assets/76e8bcb2-83f8-456a-b016-0c945eb3a8ab" />
+<img width="1908" height="1063" alt="image" src="https://github.com/user-attachments/assets/78c338ab-ae52-4ac6-9672-4e9458b493f1" />
 
 This project runs a **RAG (Retrieval-Augmented Generation)** chatbot as two services:
 
