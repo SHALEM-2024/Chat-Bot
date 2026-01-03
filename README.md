@@ -133,8 +133,13 @@ The bot is equipped with specific tools it can invoke autonomously:
 
 3.  **Run with Docker Compose:**
     ```bash
+    #Pull image from docker hub
     docker compose pull
+    #Start containers
     docker compose up -d
+    #Check Status
+    docker compose ps
+    docker ps
     ```
 
 4.  **Access the App:**
